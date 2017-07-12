@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_transform"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_default"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:is_num_indicator="true"
+                app:banner_point_gravity="bottom|center_horizontal"
+                android:layout_height="160dp" />
+
+            <!--方块-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_cube"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:banner_point_gravity="bottom|left"
+                android:layout_height="160dp" />
+
+            <!--可折叠的-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_accordion"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:banner_point_gravity="bottom|right"
+                android:layout_height="160dp" />
+
+            <!--快速翻动-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_flip"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:is_num_indicator="true"
+                app:banner_point_gravity="center_horizontal|bottom"
+                android:layout_height="160dp" />
+
+            <!--旋转-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_rotate"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="160dp" />
+
+            <!--透明度-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_alpha"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="160dp" />
+
+            <!--缩放褪去-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_ZoomFade"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="160dp" />
+
+            <!--褪去-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_Fade"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="160dp" />
+
+            <!--缩放中间-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_ZoomCenter"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:is_num_indicator="true"
+                android:layout_height="160dp" />
+
+            <!--缩放-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_zoom"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="160dp" />
+
+            <!--堆叠-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_Stack"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                app:is_num_indicator="true"
+                android:layout_height="160dp" />
+
+            <!--堆叠缩放-->
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_ZoomStack"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="160dp" />
+
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/sb_transform_Depth"
+                android:layout_width="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_height="160dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

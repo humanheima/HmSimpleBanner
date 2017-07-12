@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_simple"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/text_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="一张图片"
+        android:textColor="#ff3344"
+        android:textSize="16sp" />
+    <!--只有一个的Banner-->
+    <com.humanheima.hmsimplebanner.widget.SuperBanner
+        android:id="@+id/simple_single_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/text_single"
+        app:num_indicator_bg="@drawable/shape_number_indicator_background" />
+
+    <TextView
+        android:id="@+id/text_multi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/simple_single_banner"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="多张图片"
+        android:textColor="#ff3344"
+        android:textSize="16sp" />
+    <!--多个的Banner-->
+    <com.humanheima.hmsimplebanner.widget.SuperBanner
+        android:id="@+id/simple_multi_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/text_multi" />
+
+</RelativeLayout>

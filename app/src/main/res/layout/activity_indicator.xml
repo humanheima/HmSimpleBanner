@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_indicator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/banner_single"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                app:banner_point_gravity="bottom|right"
+                app:banner_transitionEffect="rotate"
+                app:indicator_height="24dp"
+                app:indicator_width="24dp"
+                app:is_num_indicator="true" />
+
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/banner_num"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/banner_single"
+                android:layout_marginTop="8dp"
+                app:banner_point_gravity="bottom|center_horizontal"
+                app:banner_transitionEffect="rotate"
+                app:indicator_height="24dp"
+                app:indicator_width="24dp"
+                app:is_num_indicator="true"
+                app:num_indicator_text_color="@color/colorAccent"
+                app:tip_text_color="#ff3344" />
+
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/banner_num_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/banner_single"
+                android:layout_marginTop="8dp"
+                app:banner_point_gravity="bottom|left"
+                app:banner_tipTextSize="16sp"
+                app:banner_transitionEffect="rotate"
+                app:point_drawable="@drawable/custom_point" />
+
+            <com.humanheima.hmsimplebanner.widget.SuperCopyBanner
+                android:id="@+id/banner_circle_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/banner_num_indicator"
+                android:layout_marginTop="8dp"
+                app:banner_point_gravity="bottom|right"
+                app:banner_tipTextSize="16sp"
+                app:indicator_height="8dp"
+                app:indicator_width="8dp"
+                app:is_num_indicator="false" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>
