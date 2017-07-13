@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:id="@+id/activity_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,31 +18,14 @@
                 android:id="@+id/btn_simple_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="simpleactivity" />
-
-            <Button
-                android:id="@+id/btn_super_activity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="superactivity" />
-
-            <Button
-                android:id="@+id/btn_another_activity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="anotheractivity" />
+                android:text="simpleactivity"/>
 
             <Button
                 android:id="@+id/btn_transform_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="transformactivity" />
+                android:text="transformactivity"/>
 
-            <Button
-                android:id="@+id/btn_indicator_activity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="indicatoractivity" />
         </LinearLayout>
     </ScrollView>
 

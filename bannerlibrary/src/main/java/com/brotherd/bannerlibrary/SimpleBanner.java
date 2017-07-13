@@ -13,7 +13,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -431,8 +430,10 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         public Object instantiateItem(ViewGroup container, int position) {
             position %= count;
             final int pos = position;
-            View view = LayoutInflater.from(context).inflate(R.layout.item_banner, container, false);
-            ImageView imageView = (ImageView) view.findViewById(R.id.img_banner);
+            ImageView imageView = new ImageView(context);
+            imageView.setLayoutParams(new RelativeLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageLoader.displayImage(context, imgUrls.get(position), imageView);
             if (mOnBannerClickListener != null) {
                 imageView.setOnClickListener(new OnClickListener() {
@@ -442,8 +443,8 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
                     }
                 });
             }
-            container.addView(view);
-            return view;
+            container.addView(imageView);
+            return imageView;
         }
 
         @Override
