@@ -17,11 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SuperActivity" />
-        <activity android:name=".ui.AnotherActivity" />
         <activity android:name=".ui.SimpleActivity" />
         <activity android:name=".ui.TransformActivity" />
-        <activity android:name=".ui.IndicatorActivity"></activity>
     </application>
 
 </manifest>

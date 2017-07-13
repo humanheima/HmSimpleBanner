@@ -6,10 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.humanheima.hmsimplebanner.ui.AnotherActivity;
-import com.humanheima.hmsimplebanner.ui.IndicatorActivity;
 import com.humanheima.hmsimplebanner.ui.SimpleActivity;
-import com.humanheima.hmsimplebanner.ui.SuperActivity;
 import com.humanheima.hmsimplebanner.ui.TransformActivity;
 
 import butterknife.BindView;
@@ -42,17 +39,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_simple_activity:
                 startActivity(new Intent(MainActivity.this, SimpleActivity.class));
                 break;
-            case R.id.btn_super_activity:
-                startActivity(new Intent(MainActivity.this, SuperActivity.class));
-                break;
-            case R.id.btn_another_activity:
-                startActivity(new Intent(MainActivity.this, AnotherActivity.class));
-                break;
             case R.id.btn_transform_activity:
                 startActivity(new Intent(MainActivity.this, TransformActivity.class));
-                break;
-            case R.id.btn_indicator_activity:
-                startActivity(new Intent(MainActivity.this, IndicatorActivity.class));
                 break;
             default:
                 break;

@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.brotherd.bannerlibrary.SimpleBanner;
+import com.brotherd.bannerlibrary.inter.OnBannerClickListener;
+import com.brotherd.bannerlibrary.transformer.TransitionEffect;
 import com.humanheima.hmsimplebanner.R;
-import com.humanheima.hmsimplebanner.listener.OnBannerClickListener;
-import com.humanheima.hmsimplebanner.transformer.developer.ZoomOutPageTransformer;
+import com.humanheima.hmsimplebanner.util.GlideImageLoader;
 import com.humanheima.hmsimplebanner.util.Images;
-import com.humanheima.hmsimplebanner.widget.SuperBanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,9 @@ import butterknife.ButterKnife;
 public class SimpleActivity extends AppCompatActivity {
 
     @BindView(R.id.simple_single_banner)
-    SuperBanner simpleSingleBanner;
+    SimpleBanner simpleSingleBanner;
     @BindView(R.id.simple_multi_banner)
-    SuperBanner simpleMultiBanner;
+    SimpleBanner simpleMultiBanner;
     private List<String> singleTitles;
     private List<String> singleImgs;
 
@@ -41,11 +42,8 @@ public class SimpleActivity extends AppCompatActivity {
         singleTitles = new ArrayList<>();
         singleImgs = new ArrayList<>();
         singleTitles.add("好雨知时节");
-        singleTitles.add("好雨知时节");
-        singleTitles.add("好雨知时节");
         singleImgs.add("http://img.zcool.cn/community/01b72057a7e0790000018c1bf4fce0.png");
-        singleImgs.add("http://img.zcool.cn/community/01fca557a7f5f90000012e7e9feea8.jpg");
-        singleImgs.add("http://img.zcool.cn/community/01996b57a7f6020000018c1bedef97.jpg");
+
         simpleSingleBanner.setmOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
@@ -53,9 +51,9 @@ public class SimpleActivity extends AppCompatActivity {
             }
         });
         simpleSingleBanner.setImages(singleImgs)
+                .setImageLoader(new GlideImageLoader())
                 .setBannerTitles(singleTitles)
-                .setPageTransformer(new ZoomOutPageTransformer())
-                .isNumberIndicator(true)
+                .setTransitionEffect(TransitionEffect.Flip)
                 .isAutoPlay(true)
                 .start();
 
@@ -77,6 +75,7 @@ public class SimpleActivity extends AppCompatActivity {
             }
         });
         simpleMultiBanner.setImages(multiImgs)
+                .setImageLoader(new GlideImageLoader())
                 .setBannerTitles(multiTitles)
                 .isAutoPlay(true)
                 .start();
