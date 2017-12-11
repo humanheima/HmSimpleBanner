@@ -54,5 +54,7 @@
             <flag name="right" value="0x05" />
             <flag name="center_horizontal" value="0x01" />
         </attr>
+        <!-- 是否循环播放 -->
+        <attr name="banner_cycle" format="boolean" />
     </declare-styleable>
 </resources>

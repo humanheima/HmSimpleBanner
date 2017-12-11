@@ -39,6 +39,7 @@ import java.util.List;
 
 public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChangeListener {
 
+    private static final String numberStyleFormat = "%1$d/%2$d";
     private static final int RMP = LayoutParams.MATCH_PARENT;
     private static final int RWC = LayoutParams.WRAP_CONTENT;
     private static final int LWC = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -76,6 +77,11 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     private int mPointDrawableResId;
     //图片加载器
     private ImageLoader imageLoader;
+    private boolean cyclePlay;//是否循环播放
+
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
+        this.mOnPageChangeListener = onPageChangeListener;
+    }
 
     public void setmOnBannerClickListener(OnBannerClickListener mOnBannerClickListener) {
         this.mOnBannerClickListener = mOnBannerClickListener;
@@ -120,8 +126,9 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         mTipTextColor = typedArray.getColor(R.styleable.Banner_tip_text_color, Color.WHITE);
         mTipTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_banner_tipTextSize, mTipTextSize);
         mPointGravity = typedArray.getInt(R.styleable.Banner_banner_point_gravity, mPointGravity);
-        int ordinal = typedArray.getInt(R.styleable.Banner_banner_transitionEffect, TransitionEffect.Accordion.ordinal());
+        int ordinal = typedArray.getInt(R.styleable.Banner_banner_transitionEffect, TransitionEffect.Default.ordinal());
         transitionEffect = TransitionEffect.values()[ordinal];
+        cyclePlay = typedArray.getBoolean(R.styleable.Banner_banner_cycle, true);
         typedArray.recycle();
     }
 
@@ -226,6 +233,10 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         return this;
     }
 
+    public void setCyclePlay(boolean cyclePlay) {
+        this.cyclePlay = cyclePlay;
+    }
+
     public void start() {
         initPlay(titles, imageUrls);
     }
@@ -301,7 +312,7 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     private void changeLoopPoint(int position) {
         nowSelect = position;
         if (isNumIndicator) {
-            textNumIndicator.setText((nowSelect + 1) + "/" + count);
+            textNumIndicator.setText(String.format(numberStyleFormat,nowSelect + 1 , count));
         } else {
             for (int i = 0; i < llIndicator.getChildCount(); i++) {
                 llIndicator.getChildAt(i).setEnabled(false);
@@ -418,7 +429,11 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
             if (count == 1) {
                 return 1;
             }
-            return FAKE_BANNER_SIZE;
+            if (cyclePlay) {
+                return FAKE_BANNER_SIZE;
+            } else {
+                return count;
+            }
         }
 
         @Override
@@ -454,17 +469,20 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
 
         @Override
         public void finishUpdate(ViewGroup container) {
-            if (count > 1) {
-                int position = viewPager.getCurrentItem();
-                Log.e(tag, "finishUpdate" + position);
-                if (position == 0) {
-                    position = count;
-                    viewPager.setCurrentItem(position, false);
-                } else if (position == FAKE_BANNER_SIZE - 1) {
-                    position = count - 1;
-                    viewPager.setCurrentItem(position, false);
+            if (cyclePlay) {
+                if (count > 1) {
+                    int position = viewPager.getCurrentItem();
+                    Log.e(tag, "finishUpdate" + position);
+                    if (position == 0) {
+                        position = count;
+                        viewPager.setCurrentItem(position, false);
+                    } else if (position == FAKE_BANNER_SIZE - 1) {
+                        position = count - 1;
+                        viewPager.setCurrentItem(position, false);
+                    }
                 }
             }
+
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.humanheima.hmsimplebanner.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -47,6 +49,11 @@ public class TransformActivity extends AppCompatActivity {
     SimpleBanner sbTransformZoom;
     private List<String> multiTitles;
     private List<String> multiImgs;
+
+    public static void launch(Context context) {
+        Intent intent = new Intent(context, TransformActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

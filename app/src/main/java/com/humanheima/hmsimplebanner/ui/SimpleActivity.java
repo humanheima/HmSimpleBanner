@@ -1,5 +1,7 @@
 package com.humanheima.hmsimplebanner.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -28,6 +30,11 @@ public class SimpleActivity extends AppCompatActivity {
 
     private List<String> multiTitles;
     private List<String> multiImgs;
+
+    public static void launch(Context context) {
+        Intent intent = new Intent(context, SimpleActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

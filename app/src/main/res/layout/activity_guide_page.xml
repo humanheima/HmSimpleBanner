@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--多个的Banner-->
+        <com.brotherd.bannerlibrary.SimpleBanner
+            android:id="@+id/simple_multi_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:banner_cycle="false" />
+
+        <TextView
+            android:id="@+id/text_jump_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_jump_over"
+            android:padding="8dp"
+            android:text="@string/jump_over" />
+
+        <TextView
+            android:id="@+id/text_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/bg_jump_over"
+            android:padding="8dp"
+            android:text="@string/enter"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+</layout>
+
