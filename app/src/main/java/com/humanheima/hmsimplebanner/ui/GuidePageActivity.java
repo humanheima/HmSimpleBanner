@@ -19,7 +19,6 @@ import java.util.List;
 public class GuidePageActivity extends AppCompatActivity {
 
     private ActivityGuidePageBinding binding;
-    private List<String> multiTitles;
     private List<String> multiImgs;
 
     public static void launch(Context context) {
@@ -49,11 +48,7 @@ public class GuidePageActivity extends AppCompatActivity {
     }
 
     private void initBanner() {
-        multiTitles = new ArrayList<>();
         multiImgs = new ArrayList<>();
-        multiTitles.add("");
-        multiTitles.add("");
-        multiTitles.add("");
         multiImgs.add(Images.imageThumbUrls[0]);
         multiImgs.add(Images.imageThumbUrls[1]);
         multiImgs.add(Images.imageThumbUrls[2]);
@@ -72,7 +67,6 @@ public class GuidePageActivity extends AppCompatActivity {
 
         binding.simpleMultiBanner.setImages(multiImgs)
                 .setImageLoader(new GlideImageLoader())
-                .setBannerTitles(multiTitles)
                 .start();
     }
 

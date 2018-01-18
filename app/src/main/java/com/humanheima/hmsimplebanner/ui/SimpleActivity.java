@@ -25,7 +25,6 @@ public class SimpleActivity extends AppCompatActivity {
     SimpleBanner simpleSingleBanner;
     @BindView(R.id.simple_multi_banner)
     SimpleBanner simpleMultiBanner;
-    private List<String> singleTitles;
     private List<String> singleImgs;
 
     private List<String> multiTitles;
@@ -46,12 +45,10 @@ public class SimpleActivity extends AppCompatActivity {
     }
 
     private void initSingleBanner() {
-        singleTitles = new ArrayList<>();
         singleImgs = new ArrayList<>();
-        singleTitles.add("好雨知时节");
         singleImgs.add("http://img.zcool.cn/community/01b72057a7e0790000018c1bf4fce0.png");
 
-        simpleSingleBanner.setmOnBannerClickListener(new OnBannerClickListener() {
+        simpleSingleBanner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
                 Toast.makeText(SimpleActivity.this, "position=" + position, Toast.LENGTH_SHORT).show();
@@ -59,9 +56,8 @@ public class SimpleActivity extends AppCompatActivity {
         });
         simpleSingleBanner.setImages(singleImgs)
                 .setImageLoader(new GlideImageLoader())
-                .setBannerTitles(singleTitles)
                 .setTransitionEffect(TransitionEffect.Flip)
-                .isAutoPlay(true)
+                .isAutoPlay(false)
                 .start();
 
     }
@@ -75,7 +71,7 @@ public class SimpleActivity extends AppCompatActivity {
         multiImgs.add(Images.imageThumbUrls[0]);
         multiImgs.add(Images.imageThumbUrls[1]);
         multiImgs.add(Images.imageThumbUrls[2]);
-        simpleMultiBanner.setmOnBannerClickListener(new OnBannerClickListener() {
+        simpleMultiBanner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
                 Toast.makeText(SimpleActivity.this, "position=" + position, Toast.LENGTH_SHORT).show();
@@ -83,7 +79,7 @@ public class SimpleActivity extends AppCompatActivity {
         });
         simpleMultiBanner.setImages(multiImgs)
                 .setImageLoader(new GlideImageLoader())
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .isAutoPlay(true)
                 .start();
     }

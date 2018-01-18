@@ -74,7 +74,7 @@ public class TransformActivity extends AppCompatActivity {
         multiImgs.add(Images.imageThumbUrls[12]);
 
         sbTransformDefault
-                .setmOnBannerClickListener(new OnBannerClickListener() {
+                .setOnBannerClickListener(new OnBannerClickListener() {
                     @Override
                     public void OnBannerClick(int position) {
                         Toast.makeText(TransformActivity.this, "position=" + position, Toast.LENGTH_SHORT).show();
@@ -83,90 +83,90 @@ public class TransformActivity extends AppCompatActivity {
 
         sbTransformDefault.setImages(multiImgs)
                 .setImageLoader(new GlideImageLoader())
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setTransitionEffect(TransitionEffect.Default)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformAlpha.setImages(multiImgs)
                 .setImageLoader(new GlideImageLoader())
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setTransitionEffect(TransitionEffect.Alpha)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformRotate.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Rotate)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformCube.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Cube)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformFlip.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Flip)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformAccordion.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Accordion)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformZoomFade.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.ZoomFade)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformFade.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Fade)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformZoomCenter.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.ZoomCenter)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformZoomStack.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.ZoomStack)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformStack.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Stack)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformDepth.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Depth)
                 .isAutoPlay(true)
                 .start();
 
         sbTransformZoom.setImages(multiImgs)
-                .setBannerTitles(multiTitles)
+                .setTitles(multiTitles)
                 .setImageLoader(new GlideImageLoader())
                 .setTransitionEffect(TransitionEffect.Zoom)
                 .isAutoPlay(true)

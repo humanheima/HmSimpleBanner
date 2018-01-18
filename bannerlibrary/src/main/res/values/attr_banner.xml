@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="Banner">
+    <declare-styleable name="SimpleBanner">
         <attr name="delay_time" format="integer" />
         <attr name="is_auto_play" format="boolean" />
         <attr name="is_num_indicator" format="boolean" />
@@ -21,7 +21,7 @@
             <enum name="center_crop" value="1" />
         </attr>
         <!-- 页面切换的动画效果 -->
-        <attr name="banner_transitionEffect" format="enum">
+        <attr name="transition_effect" format="enum">
             <enum name="defaultEffect" value="0" />
             <enum name="alpha" value="1" />
             <enum name="rotate" value="2" />
@@ -45,9 +45,9 @@
         <!-- 提示文案的文字颜色 -->
         <attr name="tip_text_color" format="reference|color" />
         <!-- 提示文案的文字大小 -->
-        <attr name="banner_tipTextSize" format="dimension|reference" />
+        <attr name="tip_text_size" format="dimension|reference" />
         <!-- 指示器的位置 -->
-        <attr name="banner_point_gravity">
+        <attr name="point_gravity">
             <flag name="top" value="0x30" />
             <flag name="bottom" value="0x50" />
             <flag name="left" value="0x03" />

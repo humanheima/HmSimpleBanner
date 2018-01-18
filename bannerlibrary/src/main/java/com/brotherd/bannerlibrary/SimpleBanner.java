@@ -27,7 +27,6 @@ import com.brotherd.bannerlibrary.transformer.BGAPageTransformer;
 import com.brotherd.bannerlibrary.transformer.TransitionEffect;
 import com.brotherd.bannerlibrary.util.ScreenUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,10 +59,9 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     private TextView mTipTv;//轮播的文字
     private Context context;
     private Handler handler = new Handler();
-    //attrs 属性
-    private int delayTime = 4000;//默认轮播时间3000毫秒
-    private boolean isAutoPlay = false;//默认自动轮播为false
-    private boolean isNumIndicator = false;//标志是否是数字指示
+    private int delayTime = 4000;//默认轮播时间4000毫秒
+    private boolean isAutoPlay;//默认自动轮播为false
+    private boolean isNumIndicator;//标志是否是数字指示
     private int mIndicatorMargin;
     private int mIndicatorWidth;
     private int mIndicatorHeight;
@@ -75,15 +73,15 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     private Drawable pointContainerBackground;//圆点指示器的背景
     private Drawable numIndicatorBackground;//数字指示器的背景
     private int mPointDrawableResId;
-    //图片加载器
-    private ImageLoader imageLoader;
+    private ImageLoader imageLoader;    //图片加载器
     private boolean cyclePlay;//是否循环播放
+    private boolean abortAnimation = true;
 
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         this.mOnPageChangeListener = onPageChangeListener;
     }
 
-    public void setmOnBannerClickListener(OnBannerClickListener mOnBannerClickListener) {
+    public void setOnBannerClickListener(OnBannerClickListener mOnBannerClickListener) {
         this.mOnBannerClickListener = mOnBannerClickListener;
     }
 
@@ -98,8 +96,6 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     public SimpleBanner(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
-        titles = new ArrayList<>();
-        imageUrls = new ArrayList<>();
         mTipTextSize = ScreenUtil.sp2px(context, 16);
         numIndicatorTextSize = ScreenUtil.sp2px(context, 16);
         mIndicatorWidth = ScreenUtil.dp2px(context, 6);
@@ -111,24 +107,24 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     }
 
     private void initTypedArray(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.Banner);
-        mIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_width, mIndicatorWidth);
-        mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_height, mIndicatorHeight);
-        mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.Banner_indicator_margin, mIndicatorMargin);
-        delayTime = typedArray.getInt(R.styleable.Banner_delay_time, delayTime);
-        isAutoPlay = typedArray.getBoolean(R.styleable.Banner_is_auto_play, isAutoPlay);
-        isNumIndicator = typedArray.getBoolean(R.styleable.Banner_is_num_indicator, false);
-        numIndicatorTextColor = typedArray.getColor(R.styleable.Banner_num_indicator_text_color, Color.WHITE);
-        numIndicatorTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_num_indicator_text_size, numIndicatorTextSize);
-        numIndicatorBackground = typedArray.getDrawable(R.styleable.Banner_num_indicator_bg);
-        pointContainerBackground = typedArray.getDrawable(R.styleable.Banner_point_container_background);
-        mPointDrawableResId = typedArray.getResourceId(R.styleable.Banner_point_drawable, R.drawable.bga_banner_selector_point_solid);
-        mTipTextColor = typedArray.getColor(R.styleable.Banner_tip_text_color, Color.WHITE);
-        mTipTextSize = typedArray.getDimensionPixelSize(R.styleable.Banner_banner_tipTextSize, mTipTextSize);
-        mPointGravity = typedArray.getInt(R.styleable.Banner_banner_point_gravity, mPointGravity);
-        int ordinal = typedArray.getInt(R.styleable.Banner_banner_transitionEffect, TransitionEffect.Default.ordinal());
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SimpleBanner);
+        mIndicatorWidth = typedArray.getDimensionPixelSize(R.styleable.SimpleBanner_indicator_width, mIndicatorWidth);
+        mIndicatorHeight = typedArray.getDimensionPixelSize(R.styleable.SimpleBanner_indicator_height, mIndicatorHeight);
+        mIndicatorMargin = typedArray.getDimensionPixelSize(R.styleable.SimpleBanner_indicator_margin, mIndicatorMargin);
+        delayTime = typedArray.getInt(R.styleable.SimpleBanner_delay_time, delayTime);
+        isAutoPlay = typedArray.getBoolean(R.styleable.SimpleBanner_is_auto_play, isAutoPlay);
+        isNumIndicator = typedArray.getBoolean(R.styleable.SimpleBanner_is_num_indicator, false);
+        numIndicatorTextColor = typedArray.getColor(R.styleable.SimpleBanner_num_indicator_text_color, Color.WHITE);
+        numIndicatorTextSize = typedArray.getDimensionPixelSize(R.styleable.SimpleBanner_num_indicator_text_size, numIndicatorTextSize);
+        numIndicatorBackground = typedArray.getDrawable(R.styleable.SimpleBanner_num_indicator_bg);
+        pointContainerBackground = typedArray.getDrawable(R.styleable.SimpleBanner_point_container_background);
+        mPointDrawableResId = typedArray.getResourceId(R.styleable.SimpleBanner_point_drawable, R.drawable.bga_banner_selector_point_solid);
+        mTipTextColor = typedArray.getColor(R.styleable.SimpleBanner_tip_text_color, Color.WHITE);
+        mTipTextSize = typedArray.getDimensionPixelSize(R.styleable.SimpleBanner_tip_text_size, mTipTextSize);
+        mPointGravity = typedArray.getInt(R.styleable.SimpleBanner_point_gravity, mPointGravity);
+        int ordinal = typedArray.getInt(R.styleable.SimpleBanner_transition_effect, TransitionEffect.Default.ordinal());
         transitionEffect = TransitionEffect.values()[ordinal];
-        cyclePlay = typedArray.getBoolean(R.styleable.Banner_banner_cycle, true);
+        cyclePlay = typedArray.getBoolean(R.styleable.SimpleBanner_banner_cycle, true);
         typedArray.recycle();
     }
 
@@ -173,7 +169,6 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
             llIndicator.setOrientation(LinearLayout.HORIZONTAL);
             pointContainerRl.addView(llIndicator, indicatorLp);
         }
-
         //处理轮播标题
         LayoutParams tipLp = new LayoutParams(RMP, RWC);
         tipLp.addRule(CENTER_VERTICAL);
@@ -213,18 +208,41 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         return this;
     }
 
+    /**
+     * 设置从一张图片切换到下一张的延迟时间
+     *
+     * @param delayTime
+     * @return
+     */
     public SimpleBanner setDelayTime(int delayTime) {
         this.delayTime = delayTime;
         return this;
     }
 
-    public SimpleBanner setBannerTitles(List<String> titles) {
+    /**
+     * 设置ViewPager切换的时间
+     *
+     * @param duration
+     * @return
+     */
+    public SimpleBanner setViewPagerChangeDuration(int duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    public SimpleBanner setTitles(List<String> titles) {
+        if (imageUrls != null && titles.size() != imageUrls.size()) {
+            throw new IllegalArgumentException("the size of titles must be same as imageUrls's size");
+        }
         this.titles = titles;
         return this;
     }
 
-    public SimpleBanner setImages(List<?> imagesUrl) {
-        this.imageUrls = imagesUrl;
+    public SimpleBanner setImages(List<?> imageUrls) {
+        if (titles != null && titles.size() != imageUrls.size()) {
+            throw new IllegalArgumentException("the size of imageUrls must be same as titles's size");
+        }
+        this.imageUrls = imageUrls;
         return this;
     }
 
@@ -233,27 +251,30 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         return this;
     }
 
-    public void setCyclePlay(boolean cyclePlay) {
+    /**
+     * 如果在RecyclerView中使用的话，应该设置 abortAnimation 为false
+     *
+     * @param abortAnimation
+     * @return
+     */
+    public SimpleBanner setAbortAnimation(boolean abortAnimation) {
+        this.abortAnimation = abortAnimation;
+        return this;
+    }
+
+    public SimpleBanner setCyclePlay(boolean cyclePlay) {
         this.cyclePlay = cyclePlay;
+        return this;
     }
 
     public void start() {
-        initPlay(titles, imageUrls);
-    }
-
-    /**
-     * @param titles
-     * @param imageUrls
-     */
-    private void initPlay(List<String> titles, List imageUrls) {
-        if ((titles == null || titles.size() <= 0) || (imageUrls == null || imageUrls.size() <= 0)) {
-            throw new IllegalStateException("when initPlay(List<String> titles, List<?> imageUrls) 标题和图片地址不能为空!");
+        if (imageUrls == null || imageUrls.size() <= 0) {
+            throw new IllegalStateException("when start imageUrls can not be null or empty");
         }
         if (imageLoader == null) {
-            throw new NullPointerException("you must set a imageLoader");
+            throw new NullPointerException("when start the imageLoader can not be null");
         }
         count = imageUrls.size();
-        //轮播图片大于一个,并且不是数字指示，才显示底部的小圆点
         if (count > 1) {
             initIndicator();
         }
@@ -292,6 +313,7 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         viewPager.setOverScrollMode(OVER_SCROLL_ALWAYS);
         viewPager.setOffscreenPageLimit(1);
         viewPager.setFocusable(true);
+        viewPager.setAbortAnimation(abortAnimation);
         adapter = new BannerPagerAdapter(imageUrls);
         viewPager.setAdapter(adapter);
         if (count > 1) {
@@ -304,6 +326,7 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
             }
             changeLoopPoint(nowSelect);
         } else {
+            //如果只有一张，则设置viewPager不可滑动
             viewPager.setScrollable(false);
         }
         addView(viewPager, 0, new LayoutParams(RMP, RMP));
@@ -312,7 +335,7 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     private void changeLoopPoint(int position) {
         nowSelect = position;
         if (isNumIndicator) {
-            textNumIndicator.setText(String.format(numberStyleFormat,nowSelect + 1 , count));
+            textNumIndicator.setText(String.format(numberStyleFormat, nowSelect + 1, count));
         } else {
             for (int i = 0; i < llIndicator.getChildCount(); i++) {
                 llIndicator.getChildAt(i).setEnabled(false);
@@ -325,14 +348,14 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         }
     }
 
-    public void startAutoPlay() {
+    private void resume() {
         if (isAutoPlay) {
             handler.removeCallbacks(task);
             handler.postDelayed(task, delayTime);
         }
     }
 
-    public void stopAutoPlay() {
+    private void stop() {
         handler.removeCallbacks(task);
     }
 
@@ -348,9 +371,9 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
             int action = ev.getAction();
             if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL
                     || action == MotionEvent.ACTION_OUTSIDE) {
-                startAutoPlay();
+                resume();
             } else if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-                stopAutoPlay();
+                stop();
             }
         }
         return super.dispatchTouchEvent(ev);
@@ -396,16 +419,16 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
     protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
         if (visibility == VISIBLE) {
-            startAutoPlay();
+            resume();
         } else if (visibility == INVISIBLE) {
-            stopAutoPlay();
+            stop();
         }
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        stopAutoPlay();
+        stop();
     }
 
     /**
@@ -482,7 +505,6 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
                     }
                 }
             }
-
         }
     }
 }
