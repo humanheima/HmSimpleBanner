@@ -352,11 +352,13 @@ public class SimpleBanner extends RelativeLayout implements ViewPager.OnPageChan
         if (isAutoPlay) {
             handler.removeCallbacks(task);
             handler.postDelayed(task, delayTime);
+            viewPager.setAbortAnimation(false);
         }
     }
 
     private void stop() {
         handler.removeCallbacks(task);
+        viewPager.setAbortAnimation(true);
     }
 
     /**
