@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HmSimpleBanner.iml" filepath="$PROJECT_DIR$/HmSimpleBanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HmBanner.iml" filepath="$PROJECT_DIR$/HmBanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bannerlibrary/bannerlibrary.iml" filepath="$PROJECT_DIR$/bannerlibrary/bannerlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hmbanner/hmbanner.iml" filepath="$PROJECT_DIR$/hmbanner/hmbanner.iml" />
     </modules>
   </component>
 </project>

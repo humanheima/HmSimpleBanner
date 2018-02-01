@@ -9,7 +9,6 @@ import android.view.View;
 import com.humanheima.hmsimplebanner.R;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,14 +24,13 @@ public class MainActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
-    @OnClick({R.id.btn_simple_activity, R.id.btn_transform_activity})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_simple_activity:
-                startActivity(new Intent(MainActivity.this, SimpleActivity.class));
+                SimpleActivity.launch(this);
                 break;
             case R.id.btn_transform_activity:
-                startActivity(new Intent(MainActivity.this, TransformActivity.class));
+                TransformActivity.launch(this);
                 break;
             default:
                 break;

@@ -6,12 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--多个的Banner-->
-        <com.brotherd.bannerlibrary.SimpleBanner
+        <com.hm.banner.HmBanner
             android:id="@+id/simple_multi_banner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:banner_cycle="false" />
+            app:is_cycle="false" />
 
         <TextView
             android:id="@+id/text_jump_over"

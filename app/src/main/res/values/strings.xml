@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">HmSimpleBanner</string>
+    <string name="simple_use">简单使用</string>
+    <string name="transform_effect">展示各种切换效果</string>
 </resources>

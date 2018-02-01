@@ -1,10 +1,9 @@
 package com.humanheima.hmsimplebanner.util;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.brotherd.bannerlibrary.impl.ImageLoader;
+import com.hm.banner.impl.ImageLoader;
 import com.bumptech.glide.Glide;
 import com.humanheima.hmsimplebanner.R;
 

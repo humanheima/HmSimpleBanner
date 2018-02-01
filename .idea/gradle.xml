@@ -9,7 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/bannerlibrary" />
+            <option value="$PROJECT_DIR$/hmbanner" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

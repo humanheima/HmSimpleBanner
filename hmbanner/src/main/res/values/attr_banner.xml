@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="SimpleBanner">
+
+    <declare-styleable name="HmBanner">
+        <!--自动轮播间隔时间-->
         <attr name="delay_time" format="integer" />
+        <!--是否自动轮播-->
         <attr name="is_auto_play" format="boolean" />
+        <!-- 是否循环播放 -->
+        <attr name="is_cycle" format="boolean" />
+        <!--是否是数字指示器-->
         <attr name="is_num_indicator" format="boolean" />
-        <attr name="title_background" format="color|reference" />
-        <attr name="title_textcolor" format="color|reference" />
+
+        <!--数字指示器文字颜色-->
         <attr name="num_indicator_text_color" format="color|reference" />
         <!--数字指示器文字的大小-->
         <attr name="num_indicator_text_size" format="dimension|reference" />
+        <!-- 数字指示器背景 -->
+        <attr name="num_indicator_bg" format="reference" />
 
-        <attr name="title_height" format="dimension" />
+        <!--圆点指示器的宽度-->
         <attr name="indicator_width" format="dimension" />
+        <!--圆点指示器的高度-->
         <attr name="indicator_height" format="dimension" />
+        <!--圆点指示器之间的间距-->
         <attr name="indicator_margin" format="dimension" />
-        <attr name="indicator_drawable_selected" format="reference" />
-        <attr name="indicator_drawable_unselected" format="reference" />
+        <!-- 圆点指示器容器背景 -->
+        <attr name="point_container_background" format="reference|color" />
+        <!-- 圆点指示器的切换drawable -->
+        <attr name="point_drawable" format="reference" />
+        <!-- 提示文案的文字颜色 -->
+        <attr name="tip_text_color" format="reference|color" />
+        <!-- 提示文案的文字大小 -->
+        <attr name="tip_text_size" format="dimension|reference" />
+        <!--轮播图缩放的方式-->
         <attr name="image_scale_type" format="enum">
             <enum name="fit_xy" value="0" />
             <enum name="center_crop" value="1" />
@@ -36,16 +53,6 @@
             <enum name="depth" value="11" />
             <enum name="zoom" value="12" />
         </attr>
-        <!-- 数字指示器背景 -->
-        <attr name="num_indicator_bg" format="reference" />
-        <!-- 指示点容器背景 -->
-        <attr name="point_container_background" format="reference|color" />
-        <!-- 指示点背景 -->
-        <attr name="point_drawable" format="reference" />
-        <!-- 提示文案的文字颜色 -->
-        <attr name="tip_text_color" format="reference|color" />
-        <!-- 提示文案的文字大小 -->
-        <attr name="tip_text_size" format="dimension|reference" />
         <!-- 指示器的位置 -->
         <attr name="point_gravity">
             <flag name="top" value="0x30" />
@@ -54,7 +61,7 @@
             <flag name="right" value="0x05" />
             <flag name="center_horizontal" value="0x01" />
         </attr>
-        <!-- 是否循环播放 -->
-        <attr name="banner_cycle" format="boolean" />
+
     </declare-styleable>
+
 </resources>

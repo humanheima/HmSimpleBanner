@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/activity_main"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<layout>
 
-    <ScrollView
+    <data>
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/activity_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btn_simple_activity"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="simpleactivity"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_transform_activity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="transformactivity"/>
+                <Button
+                    android:id="@+id/btn_simple_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:text="@string/simple_use" />
 
-        </LinearLayout>
-    </ScrollView>
+                <Button
+                    android:id="@+id/btn_transform_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClick"
+                    android:text="@string/transform_effect" />
 
-</LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</layout>
+
