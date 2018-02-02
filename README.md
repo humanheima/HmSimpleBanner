@@ -122,4 +122,177 @@ public class GlideImageLoader extends ImageLoader {
 
 * 关于Banner作为HeadView在RecyclerView中的使用请参看：https://github.com/humanheima/RecyclerViewDemo
 
+####作为引导页的使用,HmBanner的  自动播放和循环播放属性都应该置为false
+
+布局文件
+```
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.hm.banner.HmBanner
+            android:id="@+id/simple_multi_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:is_cycle="false" />
+
+        <TextView
+            android:id="@+id/text_jump_over"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/bg_jump_over"
+            android:padding="8dp"
+            android:text="@string/jump_over" />
+
+        <TextView
+            android:id="@+id/text_enter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/bg_jump_over"
+            android:padding="8dp"
+            android:text="@string/enter"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
+
+</layout>
+
+```
+
+代码
+
+```
+public class GuidePageActivity extends AppCompatActivity {
+
+    private ActivityGuidePageBinding binding;
+    private List<String> multiImgs;
+
+    public static void launch(Context context) {
+        Intent intent = new Intent(context, GuidePageActivity.class);
+        context.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_guide_page);
+        binding.textJumpOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.launch(GuidePageActivity.this);
+                finish();
+            }
+        });
+        binding.textEnter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.launch(GuidePageActivity.this);
+                finish();
+            }
+        });
+        initBanner();
+    }
+
+    private void initBanner() {
+        multiImgs = new ArrayList<>();
+        multiImgs.add(Images.imageThumbUrls[0]);
+        multiImgs.add(Images.imageThumbUrls[1]);
+        multiImgs.add(Images.imageThumbUrls[2]);
+        binding.simpleMultiBanner.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (position == multiImgs.size() - 1) {
+                    binding.textEnter.setVisibility(View.VISIBLE);
+                    binding.textJumpOver.setVisibility(View.INVISIBLE);
+                } else {
+                    binding.textEnter.setVisibility(View.INVISIBLE);
+                    binding.textJumpOver.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        binding.simpleMultiBanner.setImages(multiImgs)
+                .setImageLoader(new GlideImageLoader())
+                .start();
+    }
+
+}
+
+```
+
+####HmBanner相关属性
+```xml
+ <declare-styleable name="HmBanner">
+        <!--自动轮播间隔时间-->
+        <attr name="delay_time" format="integer" />
+        <!--是否自动轮播-->
+        <attr name="is_auto_play" format="boolean" />
+        <!-- 是否循环播放 -->
+        <attr name="is_cycle" format="boolean" />
+        <!--是否是数字指示器-->
+        <attr name="is_num_indicator" format="boolean" />
+
+        <!--数字指示器文字颜色-->
+        <attr name="num_indicator_text_color" format="color|reference" />
+        <!--数字指示器文字的大小-->
+        <attr name="num_indicator_text_size" format="dimension|reference" />
+        <!-- 数字指示器背景 -->
+        <attr name="num_indicator_bg" format="reference" />
+
+        <!--圆点指示器的宽度-->
+        <attr name="indicator_width" format="dimension" />
+        <!--圆点指示器的高度-->
+        <attr name="indicator_height" format="dimension" />
+        <!--圆点指示器之间的间距-->
+        <attr name="indicator_margin" format="dimension" />
+        <!-- 圆点指示器容器背景 -->
+        <attr name="point_container_background" format="reference|color" />
+        <!-- 圆点指示器的切换drawable -->
+        <attr name="point_drawable" format="reference" />
+        <!-- 提示文案的文字颜色 -->
+        <attr name="tip_text_color" format="reference|color" />
+        <!-- 提示文案的文字大小 -->
+        <attr name="tip_text_size" format="dimension|reference" />
+        <!--轮播图缩放的方式-->
+        <attr name="image_scale_type" format="enum">
+            <enum name="fit_xy" value="0" />
+            <enum name="center_crop" value="1" />
+        </attr>
+        <!-- 页面切换的动画效果 -->
+        <attr name="transition_effect" format="enum">
+            <enum name="defaultEffect" value="0" />
+            <enum name="alpha" value="1" />
+            <enum name="rotate" value="2" />
+            <enum name="cube" value="3" />
+            <enum name="flip" value="4" />
+            <enum name="accordion" value="5" />
+            <enum name="zoomFade" value="6" />
+            <enum name="fade" value="7" />
+            <enum name="zoomCenter" value="8" />
+            <enum name="zoomStack" value="9" />
+            <enum name="stack" value="10" />
+            <enum name="depth" value="11" />
+            <enum name="zoom" value="12" />
+        </attr>
+        <!-- 指示器的位置 -->
+        <attr name="point_gravity">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_horizontal" value="0x01" />
+        </attr>
+
+    </declare-styleable>
+```
 

@@ -44,8 +44,9 @@
             android:layout_height="200dp"
             android:layout_below="@+id/text_multi"
             app:delay_time="3000"
-            app:is_cycle="true"
+            app:is_cycle="false"
             app:point_gravity="left"
+            app:point_container_background="@color/colorPrimary"
             app:indicator_height="8dp"
             app:indicator_margin="8dp"
             app:indicator_width="8dp" />

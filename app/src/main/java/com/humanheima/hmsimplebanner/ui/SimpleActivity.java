@@ -76,7 +76,7 @@ public class SimpleActivity extends AppCompatActivity {
         binding.simpleMultiBanner.setImages(multiImgs)
                 .setImageLoader(new GlideImageLoader())
                 .setTitles(multiTitles)
-                .isAutoPlay(true)
+                .isAutoPlay(false)
                 .start();
     }
 }
