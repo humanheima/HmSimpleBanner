@@ -9,16 +9,24 @@
 
 HmBanner 部分实现细节请参看[ViewPager实现无限循环轮播图控件](http://blog.csdn.net/leilifengxingmw/article/details/53364392)
 
-1. 使用,首先实现ImageLoader重写展示图片的逻辑
-```java
+![demo](demo.gif)
+
+使用
+```
+implementation 'com.hm.kof97:hmbanner:1.0'
+```
+1.首先实现ImageLoader重写展示图片的逻辑（使用的是glide 4.6.1）
+```
 public class GlideImageLoader extends ImageLoader {
+    private RequestOptions options = new RequestOptions()
+            .placeholder(R.drawable.img_bg)
+            .error(R.drawable.img_bg);
 
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
         Glide.with(context.getApplicationContext())
                 .load(path)
-                .placeholder(R.drawable.img_bg)
-                .error(R.drawable.img_bg)
+                .apply(options)
                 .into(imageView);
     }
 }
