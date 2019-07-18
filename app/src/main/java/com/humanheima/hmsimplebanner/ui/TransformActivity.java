@@ -44,9 +44,9 @@ public class TransformActivity extends AppCompatActivity {
         multiTitles.add("当春乃发生");
         multiTitles.add("随风潜入夜");
         multiTitles.add("润物细无声");
-        multiImgs.add(Images.imageThumbUrls[4]);
-        multiImgs.add(Images.imageThumbUrls[11]);
-        multiImgs.add(Images.imageThumbUrls[12]);
+        multiImgs.add(Images.imageUrls[4]);
+        multiImgs.add(Images.imageUrls[11]);
+        multiImgs.add(Images.imageUrls[12]);
 
         binding.sbTransformDefault
                 .setOnBannerClickListener(new OnBannerClickListener() {

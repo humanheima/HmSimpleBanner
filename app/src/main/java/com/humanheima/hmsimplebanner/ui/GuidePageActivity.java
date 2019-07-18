@@ -49,9 +49,9 @@ public class GuidePageActivity extends AppCompatActivity {
 
     private void initBanner() {
         multiImgs = new ArrayList<>();
-        multiImgs.add(Images.imageThumbUrls[0]);
-        multiImgs.add(Images.imageThumbUrls[1]);
-        multiImgs.add(Images.imageThumbUrls[2]);
+        multiImgs.add(Images.imageUrls[0]);
+        multiImgs.add(Images.imageUrls[1]);
+        multiImgs.add(Images.imageUrls[2]);
         binding.simpleMultiBanner.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {

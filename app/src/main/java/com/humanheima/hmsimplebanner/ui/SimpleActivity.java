@@ -64,9 +64,9 @@ public class SimpleActivity extends AppCompatActivity {
         multiTitles.add("当春乃发生");
         multiTitles.add("随风潜入夜");
         multiTitles.add("润物细无声");
-        multiImgs.add(Images.imageThumbUrls[0]);
-        multiImgs.add(Images.imageThumbUrls[1]);
-        multiImgs.add(Images.imageThumbUrls[2]);
+        multiImgs.add(Images.imageUrls[0]);
+        multiImgs.add(Images.imageUrls[1]);
+        multiImgs.add(Images.imageUrls[2]);
         binding.simpleMultiBanner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {

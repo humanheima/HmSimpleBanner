@@ -32,11 +32,6 @@
         <attr name="tip_text_color" format="reference|color" />
         <!-- 提示文案的文字大小 -->
         <attr name="tip_text_size" format="dimension|reference" />
-        <!--轮播图缩放的方式-->
-        <attr name="image_scale_type" format="enum">
-            <enum name="fit_xy" value="0" />
-            <enum name="center_crop" value="1" />
-        </attr>
         <!-- 页面切换的动画效果 -->
         <attr name="transition_effect" format="enum">
             <enum name="defaultEffect" value="0" />

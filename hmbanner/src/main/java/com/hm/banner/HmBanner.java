@@ -95,7 +95,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     //是否循环播放
     private boolean cyclePlay;
     //当Banner在RecyclerView中作为头布局使用的时候，abortAnimation应设置为false
-    //防止RecylerView滑动 的时候，Banner的切换卡住的问题
+    //防止RecyclerView滑动 的时候，Banner的切换卡住的问题
     private boolean abortAnimation = true;
 
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
@@ -468,8 +468,10 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
 
         /**
          * 这个size一定要比较大才行，默认为轮播图片张数的30倍。
+         * 30倍的size和使用Integer.MAX_VALUE有区别吗？没有本质上的区别，所以改用Integer.MAX_VALUE
+         *
          */
-        private final int FAKE_BANNER_SIZE = count * 30;
+        private final int FAKE_BANNER_SIZE = Integer.MAX_VALUE;
         //轮播图片的地址
         private List imgUrls;
 
@@ -522,10 +524,10 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
 
         @Override
         public void finishUpdate(@NonNull ViewGroup container) {
+            Log.d(TAG, "finishUpdate: ");
             if (cyclePlay) {
                 if (count > 1) {
                     int position = viewPager.getCurrentItem();
-                    Log.e(TAG, "finishUpdate" + position);
                     if (position == 0) {
                         position = count;
                         viewPager.setCurrentItem(position, false);
