@@ -7,7 +7,7 @@
 
 [使用RecyclerView + ViewPager 的两个大坑！](http://blog.csdn.net/u011002668/article/details/72884893)
 
-HmBanner 部分实现细节请参看[ViewPager实现无限循环轮播图控件](http://blog.csdn.net/leilifengxingmw/article/details/53364392)
+HmBanner 部分实现细节请参看[Android 无限轮播ViewPager的实现](https://blog.csdn.net/qq402164452/article/details/54866488)
 
 ![demo](demo.gif)
 

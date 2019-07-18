@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
@@ -46,6 +45,12 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     private String TAG = HmBanner.class.getSimpleName();
     //图片轮播的数量
     private int count;
+
+    //图片轮播的真实数量,如果传入的图片列表的size大于1，那么realCount=count-2,否则，realCount=count
+    private int realCount;
+    private int firstItemIndex;
+    private int lastItemIndex;
+
     //轮播的图片地址
     private List imageUrls;
     //轮播标题
@@ -97,6 +102,10 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     //当Banner在RecyclerView中作为头布局使用的时候，abortAnimation应设置为false
     //防止RecyclerView滑动 的时候，Banner的切换卡住的问题
     private boolean abortAnimation = true;
+
+    private boolean reverse;
+    private int reversePos;
+
 
     public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         this.mOnPageChangeListener = onPageChangeListener;
@@ -251,17 +260,11 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     }
 
     public HmBanner setTitles(List<String> titles) {
-        if (imageUrls != null && titles.size() != imageUrls.size()) {
-            throw new IllegalArgumentException("the size of titles must be same as imageUrls's size");
-        }
         this.titles = titles;
         return this;
     }
 
     public HmBanner setImages(List<?> imageUrls) {
-        if (titles != null && titles.size() != imageUrls.size()) {
-            throw new IllegalArgumentException("the size of imageUrls must be same as titles's size");
-        }
         this.imageUrls = imageUrls;
         return this;
     }
@@ -288,7 +291,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     }
 
     public void start() {
-        if (imageUrls == null || imageUrls.size() <= 0) {
+        if (imageUrls == null || imageUrls.isEmpty()) {
             throw new IllegalStateException("when start imageUrls can not be null or empty");
         }
         if (imageLoader == null) {
@@ -296,7 +299,17 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
         }
         count = imageUrls.size();
         if (count > 1) {
+            if (cyclePlay) {
+                firstItemIndex = 1;
+                lastItemIndex = count - 2;
+                realCount = count - 2;
+            } else {
+                realCount = count;
+            }
+
             initIndicator();
+        } else {
+            realCount = count;
         }
         initViewPager();
     }
@@ -307,7 +320,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     private void initIndicator() {
         if (llIndicator != null) {
             llIndicator.removeAllViews();
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < realCount; i++) {
                 ImageView imageView = new ImageView(context);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LWC, LWC);
                 lp.width = mIndicatorWidth;
@@ -336,13 +349,16 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
         viewPager.setAbortAnimation(abortAnimation);
         adapter = new BannerPagerAdapter(imageUrls);
         viewPager.setAdapter(adapter);
-        if (count > 1) {
+        if (realCount > 1) {
             viewPager.addOnPageChangeListener(this);
             viewPager.setPageTransformer(true, BGAPageTransformer.getPageTransformer(transitionEffect));
             viewPager.setScrollable(true);
             //设置页面切换的时间
             if (duration >= 0 && duration <= 2000) {
                 viewPager.setPageChangeDuration(duration);
+            }
+            if (cyclePlay) {
+                viewPager.setCurrentItem(1);
             }
             changeLoopPoint(nowSelect);
         } else {
@@ -355,7 +371,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     private void changeLoopPoint(int position) {
         nowSelect = position;
         if (isNumIndicator) {
-            textNumIndicator.setText(String.format(numberStyleFormat, nowSelect + 1, count));
+            textNumIndicator.setText(String.format(numberStyleFormat, nowSelect + 1, realCount));
         } else {
             for (int i = 0; i < llIndicator.getChildCount(); i++) {
                 llIndicator.getChildAt(i).setEnabled(false);
@@ -408,19 +424,45 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
     @Override
     public void onPageSelected(int position) {
         Log.e(TAG, "onPageSelected position=" + position);
+        int finalPos = cyclePlay ? getFinalPos(position) : position;
         if (mOnPageChangeListener != null) {
-            mOnPageChangeListener.onPageSelected(position);
+            mOnPageChangeListener.onPageSelected(finalPos);
         }
-        position %= count;
         //改变相应的指示器
-        if (count > 1) {
-            changeLoopPoint(position);
+        if (realCount > 1) {
+            changeLoopPoint(finalPos);
         }
+        if (cyclePlay) {
+            if (position > lastItemIndex) {
+                reverse = true;
+                reversePos = firstItemIndex;
+            } else if (position < firstItemIndex) {
+                reverse = true;
+                reversePos = lastItemIndex;
+            }
+        }
+    }
+
+    private int getFinalPos(int position) {
+        int finalPos;
+        if (position < firstItemIndex) {
+            finalPos = lastItemIndex - 1;
+        } else if (position <= lastItemIndex) {
+            finalPos = position - 1;
+        } else {
+            finalPos = firstItemIndex - 1;
+        }
+        return finalPos;
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        if (ViewPager.SCROLL_STATE_IDLE == state && cyclePlay) {
+            if (reverse) {
+                reverse = false;
+                viewPager.setCurrentItem(reversePos, false);
+            }
+        }
     }
 
     private final Runnable task = new Runnable() {
@@ -466,12 +508,6 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
      */
     class BannerPagerAdapter extends PagerAdapter {
 
-        /**
-         * 这个size一定要比较大才行，默认为轮播图片张数的30倍。
-         * 30倍的size和使用Integer.MAX_VALUE有区别吗？没有本质上的区别，所以改用Integer.MAX_VALUE
-         *
-         */
-        private final int FAKE_BANNER_SIZE = Integer.MAX_VALUE;
         //轮播图片的地址
         private List imgUrls;
 
@@ -481,14 +517,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
 
         @Override
         public int getCount() {
-            if (count == 1) {
-                return 1;
-            }
-            if (cyclePlay) {
-                return FAKE_BANNER_SIZE;
-            } else {
-                return count;
-            }
+            return count;
         }
 
         @Override
@@ -498,7 +527,6 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            position %= count;
             final int pos = position;
             ImageView imageView = new ImageView(context);
             imageView.setLayoutParams(new RelativeLayout.LayoutParams(
@@ -509,7 +537,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
                 imageView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnBannerClickListener.OnBannerClick(pos);
+                        mOnBannerClickListener.OnBannerClick(pos - 1);
                     }
                 });
             }
@@ -520,25 +548,6 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
-        }
-
-        @Override
-        public void finishUpdate(@NonNull ViewGroup container) {
-            Log.d(TAG, "finishUpdate: ");
-            if (cyclePlay) {
-                if (count > 1) {
-                    int position = viewPager.getCurrentItem();
-                    if (position == 0) {
-                        position = count;
-                        viewPager.setCurrentItem(position, false);
-                    } else if (position == FAKE_BANNER_SIZE - 1) {
-                        position = count - 1;
-                        viewPager.setCurrentItem(position, false);
-                    }
-                }
-            } else {
-                super.finishUpdate(container);
-            }
         }
     }
 }

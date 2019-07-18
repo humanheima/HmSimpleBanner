@@ -1,7 +1,5 @@
 package com.humanheima.hmsimplebanner.ui;
 
-import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -20,11 +18,6 @@ public class GuidePageActivity extends AppCompatActivity {
 
     private ActivityGuidePageBinding binding;
     private List<String> multiImgs;
-
-    public static void launch(Context context) {
-        Intent intent = new Intent(context, GuidePageActivity.class);
-        context.startActivity(intent);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +60,8 @@ public class GuidePageActivity extends AppCompatActivity {
 
         binding.simpleMultiBanner.setImages(multiImgs)
                 .setImageLoader(new GlideImageLoader())
+                .isAutoPlay(false)
+                .setCyclePlay(false)
                 .start();
     }
 

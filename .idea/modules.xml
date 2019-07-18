@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/HmBanner.iml" filepath="$PROJECT_DIR$/HmBanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/HmSimpleBanner.iml" filepath="$PROJECT_DIR$/.idea/HmSimpleBanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hmbanner/hmbanner.iml" filepath="$PROJECT_DIR$/hmbanner/hmbanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/hmbanner/hmbanner.iml" filepath="$PROJECT_DIR$/hmbanner/hmbanner.iml" />
     </modules>
   </component>
