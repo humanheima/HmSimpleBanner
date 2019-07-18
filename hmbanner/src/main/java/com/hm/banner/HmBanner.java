@@ -466,12 +466,7 @@ public class HmBanner extends RelativeLayout implements ViewPager.OnPageChangeLi
      */
     class BannerPagerAdapter extends PagerAdapter {
 
-        /**
-         * 这个size一定要比较大才行，默认为轮播图片张数的30倍。
-         * 30倍的size和使用Integer.MAX_VALUE有区别吗？没有本质上的区别，所以改用Integer.MAX_VALUE
-         *
-         */
-        private final int FAKE_BANNER_SIZE = Integer.MAX_VALUE;
+        private final int FAKE_BANNER_SIZE = count * 30;
         //轮播图片的地址
         private List imgUrls;
 
