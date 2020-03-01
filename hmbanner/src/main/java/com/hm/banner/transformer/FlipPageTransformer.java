@@ -2,8 +2,8 @@ package com.hm.banner.transformer;
 
 import android.view.View;
 
-import static android.support.v4.view.ViewCompat.setRotationY;
-import static android.support.v4.view.ViewCompat.setTranslationX;
+import static androidx.core.view.ViewCompat.setRotationY;
+import static androidx.core.view.ViewCompat.setTranslationX;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com

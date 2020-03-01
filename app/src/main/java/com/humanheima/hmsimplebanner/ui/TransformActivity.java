@@ -2,10 +2,11 @@ package com.humanheima.hmsimplebanner.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.hm.banner.inter.OnBannerClickListener;
 import com.hm.banner.transformer.TransitionEffect;
@@ -17,7 +18,6 @@ import com.humanheima.hmsimplebanner.util.Images;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.ButterKnife;
 
 public class TransformActivity extends AppCompatActivity {
 
@@ -34,7 +34,6 @@ public class TransformActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_transform);
-        ButterKnife.bind(this);
         initial();
     }
 

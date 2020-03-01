@@ -2,12 +2,12 @@ package com.hm.banner.transformer;
 
 import android.view.View;
 
-import static android.support.v4.view.ViewCompat.setAlpha;
-import static android.support.v4.view.ViewCompat.setPivotX;
-import static android.support.v4.view.ViewCompat.setPivotY;
-import static android.support.v4.view.ViewCompat.setScaleX;
-import static android.support.v4.view.ViewCompat.setScaleY;
-import static android.support.v4.view.ViewCompat.setTranslationX;
+import static androidx.core.view.ViewCompat.setAlpha;
+import static androidx.core.view.ViewCompat.setPivotX;
+import static androidx.core.view.ViewCompat.setPivotY;
+import static androidx.core.view.ViewCompat.setScaleX;
+import static androidx.core.view.ViewCompat.setScaleY;
+import static androidx.core.view.ViewCompat.setTranslationX;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com

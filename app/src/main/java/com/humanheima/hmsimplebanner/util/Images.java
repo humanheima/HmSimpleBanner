@@ -3,14 +3,12 @@ package com.humanheima.hmsimplebanner.util;
 public class Images {
 
     public final static String[] imageUrls = new String[]{
-            "https://img-my.csdn.net/uploads/201309/01/1378037235_3453.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037235_7476.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037235_9280.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037234_3539.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037234_6318.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037194_2965.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037193_1687.jpg",
-            "https://img-my.csdn.net/uploads/201309/01/1378037193_1286.jpg",
+            "http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/b/a/c36e048e284c459686133e66a79e2eba.jpg",
+            "http://open-image.nosdn.127.net/57baaaeaad4e4fda8bdaceafdb9d45c2.jpg",
+            "http://open-image.nosdn.127.net/image/snapshot_movie/2016/11/e/9/ac655948c705413b8a63a7aaefd4cde9.jpg",
+            "http://open-image.nosdn.127.net/image/snapshot_movie/2018/3/b/c/9d451a2da3cf42b0a049ba3e249222bc.jpg",
+            "http://open-image.nosdn.127.net/image/snapshot_movie/2018/1/c/8/1aec3637270f465faae52713a7c191c8.jpg",
+            "http://open-image.nosdn.127.net/image/snapshot_movie/2017/12/2/8/f30dd5f2f09c405c98e7eb6c06c89928.jpg",
             "https://img-my.csdn.net/uploads/201309/01/1378037192_8379.jpg",
             "https://img-my.csdn.net/uploads/201309/01/1378037178_9374.jpg",
             "https://img-my.csdn.net/uploads/201309/01/1378037177_1254.jpg",

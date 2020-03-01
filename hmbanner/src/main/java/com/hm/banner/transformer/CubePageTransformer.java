@@ -2,9 +2,9 @@ package com.hm.banner.transformer;
 
 import android.view.View;
 
-import static android.support.v4.view.ViewCompat.setPivotX;
-import static android.support.v4.view.ViewCompat.setPivotY;
-import static android.support.v4.view.ViewCompat.setRotationY;
+import static androidx.core.view.ViewCompat.setPivotX;
+import static androidx.core.view.ViewCompat.setPivotY;
+import static androidx.core.view.ViewCompat.setRotationY;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
